@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <title>Portero Eléctrico</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+    <!--Desarrollemos un portero eléctrico. Tendrá dos visores: PISO de dos posiciones y el DPTO una posición. Los pisos van del 00 al 42. Los dptos, del 1 al 8.
+    El botón llamar, muestra el mensaje de abajo. El botón borrar limpia los visores y el mensaje de abajo.
+    Si se hace referencia a un piso y/o dpto que no existe, mostrar el error en el visor de abajo.-->
+
+    <script>
+
+      //Variables auxiliares.
+      var numPiso = '';
+      var numDpto = '';
+      var conta = 0;
+
+      //Función para los botones numéricos.
+      function tecladoNum(num){
+
+        if (conta == 0){
+            numPiso = numPiso + num;
+            document.getElementById('piso').value = numPiso;
+            conta++;
+        } else if (conta == 1){
+            numPiso = numPiso + num;
+            document.getElementById('piso').value = numPiso;
+            conta++;
+        } else if (conta == 2){
+            numDpto = numDpto + num;
+            document.getElementById('dpto').value = numDpto;
+            conta++;
+        }
+      }
+
+      //Función para el botón Llamar.
+      function llamar(){
+        var pisoInt = parseInt(numPiso);
+        var dptoInt = parseInt(numDpto);
+
+        if (pisoInt <= 42 && pisoInt >= 0 && dptoInt <= 8 && dptoInt >= 1) {
+          document.getElementById('mensaje').value = 'Llamando al piso ' + numPiso + ', departamento ' + numDpto + '.';
+        } else {
+            document.getElementById('mensaje').value = 'El número de piso y/o número de departamento es inválido.';
+        }
+      }
+
+      //Función para el botón Borrar.
+      function borrar(){
+        conta = 0;
+        numPiso = '';
+        numDpto = '';
+        document.getElementById('piso').value='';
+        document.getElementById('dpto').value='';
+        document.getElementById('mensaje').value='';
+      }
+    </script>
+
+      <!--Inicia el Portero Eléctrico-->
+    <section>
+
+      <!--Visores de Piso y Dpto.-->
+      <div class="box1">
+        <input type="text" id="piso">
+        <input type="text" id="dpto">
+
+      <!--Teclado Numérico-->
+      </div>
+      <div class="box2">
+        <button type="button" id='1' onclick="tecladoNum('1')">1</button>
+        <button type="button" id='2' onclick="tecladoNum('2')">2</button>
+        <button type="button" id='3' onclick="tecladoNum('3')">3</button>
+      </div>
+      <div class="box3">
+        <button type="button" id="4" onclick="tecladoNum('4')">4</button>
+        <button type="button" id="5" onclick="tecladoNum('5')">5</button>
+        <button type="button" id="6" onclick="tecladoNum('6')">6</button>
+      </div>
+      <div class="box4">
+        <button type="button" id='7' onclick="tecladoNum('7')">7</button>
+        <button type="button" id='8' onclick="tecladoNum('8')">8</button>
+        <button type="button" id='9' onclick="tecladoNum('9')">9</button>
+      </div>
+      <div class="box5">
+        <button type="button" id='0' onclick="tecladoNum('0')">0</button>
+        <button type="button" onclick="llamar()">Llamar</button>
+        <button type="button" onclick="borrar()">Borrar</button>
+      </div>
+      <!--Visor de Mensajes-->
+      <div class="box6">
+        <input type="text" id="mensaje">
+      </div>
+
+    </section>
+  </body>
+</html>
